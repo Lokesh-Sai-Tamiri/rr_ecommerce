@@ -1,0 +1,11 @@
+import '@mui/material/Chip';
+
+declare module '@mui/material/Chip' {
+  interface ChipPropsVariantOverrides {
+    light: true;
+  }
+
+  interface ChipClasses {
+    light: string;
+  }
+}

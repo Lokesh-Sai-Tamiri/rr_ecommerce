@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation #<%= quotation.number %> - Radiant Research</title>
+    <style>
+        /* General Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quotation-document {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        /* Top Blue Patterned Header */
+        .top-pattern-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 0;
+        }
+
+        /* Content Wrapper for Padding */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0;
+            position: relative;
+            padding-top: 10px;
+        }
+
+        .company-info {
+            width: 50%;
+            padding-left: 5px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            line-height: 1;
+        }
+
+        .logo-text .radiant {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1976d2;
+            display: block;
+        }
+
+        .logo-text .research {
+            font-size: 12px;
+            color: #1565c0;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .company-address p {
+            font-size: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .quotation-details {
+            width: 50%;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .quotation-details h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quotation-details p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .quotation-details .from-section {
+            margin-top: 15px;
+        }
+
+        .quotation-details .from-section strong {
+            display: block;
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .quotation-details .from-section p {
+            margin-left: 20px;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* From and To Section - Same Line */
+        .from-to-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .from-section-left {
+            width: 50%;
+            padding-left: 5px;
+        }
+
+        .to-section-right {
+            width: 50%;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .from-section-left strong,
+        .to-section-right strong {
+            display: block;
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .from-section-left p,
+        .to-section-right p {
+            font-size: 10px;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 2px;
+        }
+
+        /* Main Table Section */
+        .table-section {
+            margin-top: 30px;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10px;
+            color: #333;
+        }
+
+        .table-section th, .table-section td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .table-section thead th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .table-section thead th:nth-child(1) { text-align: left; width: 5%; }
+        .table-section thead th:nth-child(2) { text-align: left; width: 35%; }
+        .table-section thead th:nth-child(3) { text-align: left; width: 15%; }
+        .table-section thead th:nth-child(4) { text-align: center; width: 5%; }
+        .table-section thead th:nth-child(5) { text-align: right; width: 15%; }
+        .table-section thead th:nth-child(6) { text-align: right; width: 15%; }
+
+        .table-section tbody td {
+            line-height: 1.4;
+        }
+
+        .table-section .product-description strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .table-section .product-description ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .table-section .product-description ul li {
+            position: relative;
+            margin-bottom: 2px;
+            font-size: 9px;
+            color: #555;
+        }
+
+        .table-section .product-description ul li::before {
+            content: '•';
+            position: absolute;
+            left: -10px;
+            color: #555;
+        }
+        .table-section .product-description ul li.no-bullet::before {
+            content: '';
+        }
+        .table-section .product-description ul li span {
+            margin-left: 15px;
+            display: block;
+        }
+        .table-section .product-description ul li.no-bullet span {
+            margin-left: 0;
+        }
+
+        .table-section .price-cell {
+            color: #000000;
+            font-weight: normal;
+            text-align: right;
+        }
+        .table-section .qty-cell {
+            text-align: center;
+        }
+        .table-section .guidelines-cell {
+            text-align: left;
+        }
+
+        /* Specific styling for the split Unit/Total Price headers */
+        .split-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            line-height: 1;
+        }
+        .split-header span:first-child {
+            font-size: 9px;
+            margin-bottom: 2px;
+        }
+        .split-header span:last-child {
+            font-size: 10px;
+        }
+        .table-section thead th:nth-child(5) .split-header,
+        .table-section thead th:nth-child(6) .split-header {
+            align-items: flex-end;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+
+        .summary-charges {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .summary-charges h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .summary-charges p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .summary-charges .grand-total {
+            font-weight: bold;
+            color: #333;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .terms-conditions {
+            width: 100%;
+        }
+
+        .terms-conditions h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .terms-conditions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .terms-conditions ul li {
+            position: relative;
+            margin-bottom: 5px;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .terms-conditions ul li::before {
+            content: counter(terms-counter) ')';
+            position: absolute;
+            left: 0;
+            color: #555;
+            margin-right: 5px;
+            counter-increment: terms-counter;
+        }
+
+        .terms-conditions ul {
+            counter-reset: terms-counter;
+        }
+        .terms-conditions ul li span {
+            margin-left: 15px;
+            display: block;
+        }
+
+        /* Bottom Contact Info */
+        .bottom-contact {
+            text-align: center;
+            font-size: 9px;
+            color: #555;
+            margin-top: 30px;
+            line-height: 1.5;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quotation-document">
+        <div class="top-pattern-bg"></div>
+        <div class="content-wrapper">
+            <div class="header-section">
+                <div class="company-info">
+                    <div class="logo">
+                        <img src="https://dev.radiantresearch.in/_next/image?url=%2Fassets%2Fimages%2Flogo.png&w=256&q=75" 
+                             alt="Radiant Research Logo" 
+                             class="logo-image">
+                        <div class="logo-text">
+                            <span class="radiant">RADIANT</span>
+                            <span class="research">RESEARCH</span>
+                        </div>
+                    </div>
+                    <div class="company-address">
+                        <!-- Company address moved to From section below -->
+                    </div>
+                </div>
+                <div class="quotation-details">
+                    <h2>Quotation #<%= quotation.number %></h2>
+                    <p>Created Date: <%= quotation.createdDate %></p>
+                    <p>Expiry Date: <%= quotation.expiryDate %></p>
+                </div>
+            </div>
+
+            <!-- From and To Section - Same Line -->
+            <div class="from-to-section">
+                <div class="from-section-left">
+                    <strong>From:</strong>
+                    <p>Radiant Research Services Pvt Ltd</p>
+                    <p>Plot No:99/A, 8th Main Road, IIIrd Phase,</p>
+                    <p>Peenya Industrial Area, Bengaluru, Karnataka, India 560058</p>
+                    <p>info@radiantresearch.in</p>
+                    <p>+91 80505 16699</p>
+                    <p>GSTIN: 29AAECR5347Q2ZJ</p>
+                </div>
+                <div class="to-section-right">
+                    <strong>To:</strong>
+                    <p><%= customer.name %></p>
+                    <p><%= customer.company %></p>
+                    <p><%= customer.email %></p>
+                    <p><%= customer.phone %></p>
+                </div>
+            </div>
+
+            <table class="table-section">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Product Description</th>
+                        <th>Guidelines</th>
+                        <th>Qty</th>
+                        <th>
+                            <div class="split-header">
+                                <span>Unit</span>
+                                <span>Price</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="split-header">
+                                <span>Total</span>
+                                <span>Price</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% products.forEach((product, index) => { %>
+                        <% product.guidelines.forEach((guideline, gIndex) => { %>
+                            <tr>
+                                <% if (gIndex === 0) { %>
+                                    <td rowspan="<%= product.guidelines.length %>"><%= index + 1 %></td>
+                                    <td class="product-description" rowspan="<%= product.guidelines.length %>">
+                                        <strong><%= product.title %></strong>
+                                        <ul>
+                                            <% product.details.forEach(detail => { %>
+                                                <% if (detail.startsWith('Sample Description:')) { %>
+                                                    <li class="no-bullet"><span><%= detail %></span></li>
+                                                <% } else { %>
+                                                    <li><span><%= detail %></span></li>
+                                                <% } %>
+                                            <% }) %>
+                                        </ul>
+                                    </td>
+                                <% } %>
+                                <td class="guidelines-cell"><%= guideline.name %></td>
+                                <td class="qty-cell"><%= guideline.qty %></td>
+                                <td class="price-cell">₹<%= guideline.unitPrice.toLocaleString("en-IN") %></td>
+                                <td class="price-cell">₹<%= (guideline.qty * guideline.unitPrice).toLocaleString("en-IN") %></td>
+                            </tr>
+                        <% }) %>
+                    <% }) %>
+                </tbody>
+            </table>
+
+            <div class="footer-section">
+                <div class="summary-charges">
+                    <h3>Summary of Charges:</h3>
+                    <p>Sub total (excl. Tax): ₹<%= summary.subTotal.toLocaleString("en-IN") %></p>
+                    <p>GST: <%= summary.gstPercent %>% ₹<%= summary.gstAmount.toLocaleString("en-IN") %></p>
+                    <p class="grand-total">Grand Total: ₹<%= summary.grandTotal.toLocaleString("en-IN") %></p>
+                </div>
+                <div class="terms-conditions">
+                    <h3>Terms and Conditions:</h3>
+                    <ul>
+                        <li><span>This quotation is valid for 30 days from the date of issue unless otherwise stated.</span></li>
+                        <li><span>Samples will be stored only for 30 days after the report delivery.</span></li>
+                        <li><span>The scope of this project includes only testing mentioned above and during analysis, if additional services are needed, then those will be charged extra</span></li>
+                        <li><span>The identity and composition of the test item is the responsibility of the sponsor. No analysis will be performed at Radiant Research Services Pvt Ltd to confirm it.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-contact">
+                <p>Please use <%= quotation.number %> as a further reference number</p>
+                <p>For any questions please contact us at info@radiantresearch.in</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

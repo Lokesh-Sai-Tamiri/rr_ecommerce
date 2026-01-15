@@ -1,0 +1,20 @@
+{
+  "name": "quotation-generator",
+  "version": "1.0.0",
+  "description": "Dynamic quotation generator with EJS templates",
+  "main": "quotation-server.js",
+  "scripts": {
+    "start": "node quotation-server.js",
+    "dev": "nodemon quotation-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["quotation", "ejs", "pdf", "template"],
+  "author": "Radiant Research",
+  "license": "MIT"
+}

@@ -1,0 +1,85 @@
+/**
+ * @fileoverview About Us data for ServiceComponent
+ */
+
+export const aboutUsData = {
+  title: "About Us",
+  titleKey: "aboutus.title",
+  description: "Radiant Research is a leading Contract Research Organization (CRO) specializing in comprehensive research and development services for pharmaceutical, nutraceutical, and cosmetic industries.",
+  descriptionKey: "aboutus.description",
+  image: "/assets/images/about.png",
+  imageMobile: "/assets/images/about.png",
+  highlights: [
+    "15+ Years Experience",
+    "AYUSH Certified",
+    "ISO 9001:2015",
+    "Global Partnerships",
+  ],
+  highlightKeys: [
+    "aboutus.highlights.experience",
+    "aboutus.highlights.ayush-certified",
+    "aboutus.highlights.iso-certified",
+    "aboutus.highlights.global-partnerships",
+  ],
+  salientFeatures: [
+    "aboutus.salient-features.research-excellence",
+    "aboutus.salient-features.quality-assurance",
+    "aboutus.salient-features.regulatory-compliance",
+    "aboutus.salient-features.innovation",
+    "aboutus.salient-features.customer-focus",
+  ],
+  specializedServices: [
+    {
+      title: "Research Excellence",
+      titleKey: "aboutus.services.research-excellence.title",
+      description: "Delivering cutting-edge research solutions with unwavering commitment to quality and scientific integrity.",
+      descriptionKey: "aboutus.services.research-excellence.description",
+    },
+    {
+      title: "Quality Assurance",
+      titleKey: "aboutus.services.quality-assurance.title",
+      description: "Maintaining the highest standards of quality through rigorous testing and validation protocols.",
+      descriptionKey: "aboutus.services.quality-assurance.description",
+    },
+    {
+      title: "Regulatory Compliance",
+      titleKey: "aboutus.services.regulatory-compliance.title",
+      description: "Ensuring full compliance with international regulatory standards and guidelines.",
+      descriptionKey: "aboutus.services.regulatory-compliance.description",
+    },
+    {
+      title: "Innovation & Technology",
+      titleKey: "aboutus.services.innovation.title",
+      description: "Leveraging advanced technologies and innovative methodologies for superior research outcomes.",
+      descriptionKey: "aboutus.services.innovation.description",
+    },
+    {
+      title: "Customer Focus",
+      titleKey: "aboutus.services.customer-focus.title",
+      description: "Building long-term partnerships through personalized service and dedicated support.",
+      descriptionKey: "aboutus.services.customer-focus.description",
+    },
+  ],
+  // Add empty arrays for other service sections to prevent errors
+  phytochemistryServices: [],
+  preclinicalServices: [],
+  phytochemistryAdvancedServices: [],
+  clinicalServices: [],
+  toxicologyServices: [],
+  qualityControlServices: [],
+  microbialServices: [],
+  qualityControl: [],
+  pharmacognosticServices: [],
+  physicochemicalServices: [],
+  efficacyServices: [],
+  cancerServices: [],
+  antioxidantServices: [],
+  diabetesServices: [],
+  immunologyServices: [],
+  hepatoprotectiveServices: [],
+  antiInfectiveServices: [],
+  obesityServices: [],
+  cosmeticServices: [],
+  otherServices: [],
+  productDevelopmentServices: [],
+};

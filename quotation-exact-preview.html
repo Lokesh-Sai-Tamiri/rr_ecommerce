@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation #RR1940 - Radiant Research</title>
+    <style>
+        /* General Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .quotation-document {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 20px;
+        }
+
+        /* Top Blue Patterned Header */
+        .top-pattern-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            z-index: 0;
+        }
+
+        /* Content Wrapper for Padding */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+            padding-top: 10px;
+        }
+
+        .company-info {
+            width: 50%;
+            padding-left: 5px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            line-height: 1;
+        }
+
+        .logo-text .radiant {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1976d2;
+            display: block;
+        }
+
+        .logo-text .research {
+            font-size: 12px;
+            color: #1565c0;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .company-address p {
+            font-size: 10px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .quotation-details {
+            width: 50%;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .quotation-details h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quotation-details p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .quotation-details .from-section {
+            margin-top: 15px;
+        }
+
+        .quotation-details .from-section strong {
+            display: block;
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .quotation-details .from-section p {
+            margin-left: 20px;
+            font-size: 10px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Main Table Section */
+        .table-section {
+            margin-top: 30px;
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 10px;
+            color: #333;
+        }
+
+        .table-section th, .table-section td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .table-section thead th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .table-section thead th:nth-child(1) { text-align: left; width: 5%; }
+        .table-section thead th:nth-child(2) { text-align: left; width: 35%; }
+        .table-section thead th:nth-child(3) { text-align: left; width: 15%; }
+        .table-section thead th:nth-child(4) { text-align: center; width: 5%; }
+        .table-section thead th:nth-child(5) { text-align: right; width: 15%; }
+        .table-section thead th:nth-child(6) { text-align: right; width: 15%; }
+
+        .table-section tbody td {
+            line-height: 1.4;
+        }
+
+        .table-section .product-description strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 11px;
+            color: #333;
+        }
+
+        .table-section .product-description ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .table-section .product-description ul li {
+            position: relative;
+            margin-bottom: 2px;
+            font-size: 9px;
+            color: #555;
+        }
+
+        .table-section .product-description ul li::before {
+            content: '•';
+            position: absolute;
+            left: -10px;
+            color: #555;
+        }
+        .table-section .product-description ul li span {
+            margin-left: 15px;
+            display: block;
+        }
+
+        .table-section .price-cell {
+            color: #000000;
+            font-weight: normal;
+            text-align: right;
+        }
+        .table-section .qty-cell {
+            text-align: center;
+        }
+        .table-section .guidelines-cell {
+            text-align: left;
+        }
+
+        /* Specific styling for the split Unit/Total Price headers */
+        .split-header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            line-height: 1;
+        }
+        .split-header span:first-child {
+            font-size: 9px;
+            margin-bottom: 2px;
+        }
+        .split-header span:last-child {
+            font-size: 10px;
+        }
+        .table-section thead th:nth-child(5) .split-header,
+        .table-section thead th:nth-child(6) .split-header {
+            align-items: flex-end;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            margin-top: 40px;
+            padding: 0 20px;
+        }
+
+        .summary-charges {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .summary-charges h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .summary-charges p {
+            font-size: 10px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .summary-charges .grand-total {
+            font-weight: bold;
+            color: #333;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .terms-conditions {
+            width: 100%;
+        }
+
+        .terms-conditions h3 {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .terms-conditions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .terms-conditions ul li {
+            position: relative;
+            margin-bottom: 5px;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .terms-conditions ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #555;
+            margin-right: 5px;
+        }
+        .terms-conditions ul li span {
+            margin-left: 15px;
+            display: block;
+        }
+
+        /* Bottom Contact Info */
+        .bottom-contact {
+            text-align: center;
+            font-size: 9px;
+            color: #555;
+            margin-top: 30px;
+            line-height: 1.5;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quotation-document">
+        <div class="top-pattern-bg"></div>
+        <div class="content-wrapper">
+            <div class="header-section">
+                <div class="company-info">
+                    <div class="logo">
+                        <img src="https://dev.radiantresearch.in/_next/image?url=%2Fassets%2Fimages%2Flogo.png&w=256&q=75" 
+                             alt="Radiant Research Logo" 
+                             class="logo-image">
+                        <div class="logo-text">
+                            <span class="radiant">RADIANT</span>
+                            <span class="research">RESEARCH PVT. LTD.</span>
+                        </div>
+                    </div>
+                    <div class="company-address">
+                        <p>Plot No:99/A, 8th Main Road, IIIrd Phase,</p>
+                        <p>Peenya Industrial Area, Bengaluru, Karnataka, India</p>
+                        <p>560058</p>
+                        <p>info@radiantresearch.in</p>
+                        <p>+91 80505 16699</p>
+                    </div>
+                </div>
+                <div class="quotation-details">
+                    <h2>Quotation #RR1940</h2>
+                    <p>Created Date: 17/09/2025</p>
+                    <p>Expiry Date: 17/10/2025</p>
+                    <div class="from-section">
+                        <strong>From:</strong>
+                        <p>vijaya omkar</p>
+                        <p>dcfd</p>
+                        <p>vijayomkar.bolisetti+4@gmail.com</p>
+                        <p>01234567890</p>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table-section">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Product Description</th>
+                        <th>Guidelines</th>
+                        <th>Qty</th>
+                        <th>
+                            <div class="split-header">
+                                <span>Unit</span>
+                                <span>Price</span>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="split-header">
+                                <span>Total</span>
+                                <span>Price</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="1">1</td>
+                        <td class="product-description">
+                            <strong>Toxicity Study</strong>
+                            <ul>
+                                <li><span>Sample Description: rtt</span></li>
+                                <li><span>Product Type: Pharmaceuticals</span></li>
+                                <li><span>Sample Form: Suspensions</span></li>
+                                <li><span>Sample Solvent: Ethanol</span></li>
+                                <li><span>Application: Inhalation</span></li>
+                            </ul>
+                        </td>
+                        <td class="guidelines-cell">OECD 423</td>
+                        <td class="qty-cell">1</td>
+                        <td class="price-cell">₹60,000</td>
+                        <td class="price-cell">₹60,000</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">2</td>
+                        <td class="product-description" rowspan="2">
+                            <strong>Microbiology & Virology Study</strong>
+                            <ul>
+                                <li><span>Sample Description: rt</span></li>
+                                <li><span>Product Type: Nutraceuticals</span></li>
+                                <li><span>Sample Form: Gel</span></li>
+                                <li><span>Sample Solvent: Alcohol</span></li>
+                                <li><span>Type of Micro-organism: Bacteria</span></li>
+                                <li><span>Micro-organism: Staphylococcus aureus, Escherichia coli, Pseudomonas aeruginosa, Cutibacterium acnes</span></li>
+                            </ul>
+                        </td>
+                        <td class="guidelines-cell">OECD 408</td>
+                        <td class="qty-cell">1</td>
+                        <td class="price-cell">₹13,50,000</td>
+                        <td class="price-cell">₹13,50,000</td>
+                    </tr>
+                    <tr>
+                        <td class="guidelines-cell">EN 1500</td>
+                        <td class="qty-cell">8</td>
+                        <td class="price-cell">₹7,500</td>
+                        <td class="price-cell">₹60,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="footer-section">
+                <div class="summary-charges">
+                    <h3>Summary of Charges:</h3>
+                    <p>Sub total (excl. Tax): ₹14,70,000</p>
+                    <p>GST: 18% ₹2,64,600</p>
+                    <p class="grand-total">Grand Total: ₹17,34,600</p>
+                </div>
+                <div class="terms-conditions">
+                    <h3>Terms and Conditions:</h3>
+                    <ul>
+                        <li><span>This quotation is valid for 30 days from the date of issue unless otherwise stated.</span></li>
+                        <li><span>Prices are subject to change if the quotation has expired or if project scope is revised.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-contact">
+                <p>Please use RR1940 as a further reference number</p>
+                <p>For any questions please contact us at info@radiantresearch.in</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

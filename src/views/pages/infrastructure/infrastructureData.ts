@@ -1,0 +1,85 @@
+/**
+ * @fileoverview Infrastructure data for ServiceComponent
+ */
+
+export const infrastructureData = {
+  title: "Infrastructure",
+  titleKey: "infrastructure.title",
+  description: "Radiant Research's research facility houses Biotechnology platforms like Cell Biology, Molecular Biology, Microbiology, Biochemistry and well-designed animal house to offer a wide range of preclinical services.",
+  descriptionKey: "infrastructure.description",
+  image: "/assets/images/infrastructure.png",
+  imageMobile: "/assets/images/infrastructure.png",
+  highlights: [
+    "AYUSH Certified",
+    "CPCSEA Standards", 
+    "State-of-the-Art Equipment",
+    "UPS & DG Power Backup",
+  ],
+  highlightKeys: [
+    "infrastructure.highlights.ayush-certified",
+    "infrastructure.highlights.cpcsea-standards",
+    "infrastructure.highlights.state-of-art-equipment",
+    "infrastructure.highlights.power-backup",
+  ],
+  salientFeatures: [
+    "infrastructure.salient-features.laboratories",
+    "infrastructure.salient-features.drug-testing",
+    "infrastructure.salient-features.cosmetic-testing",
+    "infrastructure.salient-features.animal-house",
+    "infrastructure.salient-features.power-backup",
+  ],
+  specializedServices: [
+    {
+      title: "In Vitro Laboratories",
+      titleKey: "infrastructure.services.in-vitro-laboratories.title",
+      description: "Well-equipped In vitro Cell biology, Molecular Biology and Microbiology laboratories.",
+      descriptionKey: "infrastructure.services.in-vitro-laboratories.description",
+    },
+    {
+      title: "AYUSH Certified Drug Testing Laboratory",
+      titleKey: "infrastructure.services.ayush-certified.title",
+      description: "Well-equipped AYUSH certified Drug Testing Laboratory supported by separate microbiology lab, analytical facility.",
+      descriptionKey: "infrastructure.services.ayush-certified.description",
+    },
+    {
+      title: "Cosmetic Testing Protocols",
+      titleKey: "infrastructure.services.cosmetic-testing.title",
+      description: "Standardized protocols for cosmetic testing with suitable equipment's to simulate the natural conditions.",
+      descriptionKey: "infrastructure.services.cosmetic-testing.description",
+    },
+    {
+      title: "CPCSEA Standard Animal House",
+      titleKey: "infrastructure.services.animal-house.title",
+      description: "Animal house as per CPCSEA standards with efficient AHU, separate breeding and experimentation areas with dedicated in-house biochemistry and histology facility.",
+      descriptionKey: "infrastructure.services.animal-house.description",
+    },
+    {
+      title: "Power Backup Systems",
+      titleKey: "infrastructure.services.power-backup.title",
+      description: "Entire facility is backed up with UPS and DG power.",
+      descriptionKey: "infrastructure.services.power-backup.description",
+    },
+  ],
+  // Add empty arrays for other service sections to prevent errors
+  phytochemistryServices: [],
+  preclinicalServices: [],
+  phytochemistryAdvancedServices: [],
+  clinicalServices: [],
+  toxicologyServices: [],
+  qualityControlServices: [],
+  microbialServices: [],
+  qualityControl: [],
+  pharmacognosticServices: [],
+  physicochemicalServices: [],
+  efficacyServices: [],
+  cancerServices: [],
+  antioxidantServices: [],
+  diabetesServices: [],
+  immunologyServices: [],
+  hepatoprotectiveServices: [],
+  antiInfectiveServices: [],
+  obesityServices: [],
+  cosmeticServices: [],
+  otherServices: [],
+  productDevelopmentServices: [],
+};

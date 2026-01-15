@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotation Preview - Radiant Research</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .quotation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quotation-header {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+            color: white;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quotation-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-logo img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .company-tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .company-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .address-section {
+            flex: 1;
+        }
+
+        .address-line {
+            font-size: 12px;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            font-size: 12px;
+            margin-bottom: 3px;
+            opacity: 0.9;
+        }
+
+        .quotation-details {
+            text-align: right;
+            flex: 1;
+        }
+
+        .quotation-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .quotation-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            opacity: 0.9;
+        }
+
+        .info-value {
+            opacity: 1;
+        }
+
+        .customer-section {
+            padding: 30px;
+            background: #fafafa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1976d2;
+        }
+
+        .customer-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .customer-info {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .customer-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .customer-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .quotation-table {
+            padding: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        .table-header {
+            background: #f5f5f5;
+            border-bottom: 2px solid #1976d2;
+        }
+
+        .table-header th {
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 10px;
+            color: #1976d2;
+            border-right: 1px solid #ddd;
+            white-space: nowrap;
+        }
+
+        .table-header th:last-child {
+            border-right: none;
+        }
+
+        .table-body tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table-body tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .table-body tr:hover {
+            background: #f0f8ff;
+        }
+
+        .table-body td {
+            padding: 8px;
+            font-size: 10px;
+            color: #333;
+            border-right: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+
+        .table-body td:last-child {
+            border-right: none;
+        }
+
+        .sno-cell {
+            text-align: center;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .product-description {
+            max-width: 200px;
+            line-height: 1.4;
+        }
+
+        .product-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .product-details {
+            font-size: 9px;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .product-details .detail-item {
+            margin-bottom: 3px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .guideline-cell {
+            font-weight: 500;
+            color: #1976d2;
+        }
+
+        .quantity-cell {
+            text-align: center;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .price-cell {
+            text-align: right;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .total-row {
+            background: #e8f5e8 !important;
+            border-top: 2px solid #4caf50;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            color: #2e7d32;
+            padding: 12px 8px;
+        }
+
+        .total-label {
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .total-value {
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .quotation-footer {
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .terms-section {
+            margin-bottom: 20px;
+        }
+
+        .terms-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .terms-list {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .terms-list li {
+            margin-bottom: 5px;
+        }
+
+        .contact-footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .contact-footer a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+
+        .contact-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .quotation-number {
+            background: #1976d2;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .validity-badge {
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .quotation-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .customer-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .company-details {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .quotation-details {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quotation-container">
+        <!-- Header Section -->
+        <div class="quotation-header">
+            <div class="company-logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiMxOTc2RDIiLz4KPHN2ZyB4PSIxNSIgeT0iMTUiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgdmlld0JveD0iMCAwIDMwIDMwIiBmaWxsPSJub25lIj4KPHBhdGggZD0iTTE1IDJMMjAgMTBIMTBMMTUgMloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNSAyOEwyMCAyMEgxMEwxNSAyOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yIDIwTDEwIDEwVjIwSDJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjggMjBMMjAgMTBWMjBIMjhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" alt="Radiant Research Logo">
+            </div>
+            
+            <div class="company-name">Radiant Research Services Private Limited</div>
+            <div class="company-tagline">Advanced Research & Testing Solutions</div>
+            
+            <div class="company-details">
+                <div class="address-section">
+                    <div class="address-line">Plot No:99/A, 8th Main Road, IIIrd Phase,</div>
+                    <div class="address-line">Peenya Industrial Area, Bengaluru, Karnataka, India 560058</div>
+                    <div class="contact-info">info@radiantresearch.in</div>
+                    <div class="contact-info">+91 80505 16699</div>
+                </div>
+                
+                <div class="quotation-details">
+                    <div class="quotation-title">QUOTATION</div>
+                    <div class="quotation-info">
+                        <div class="info-row">
+                            <span class="info-label">Quotation No:</span>
+                            <span class="info-value quotation-number">RR1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Date:</span>
+                            <span class="info-value">15/12/2024</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Valid Till:</span>
+                            <span class="info-value validity-badge">14/01/2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Section -->
+        <div class="customer-section">
+            <div class="section-title">Customer Details</div>
+            <div class="customer-details">
+                <div class="customer-info">
+                    <div class="customer-label">Customer Name</div>
+                    <div class="customer-value">John Smith</div>
+                </div>
+                <div class="customer-info">
+                    <div class="customer-label">Company</div>
+                    <div class="customer-value">ABC Pharmaceuticals Ltd</div>
+                </div>
+                <div class="customer-info">
+                    <div class="customer-label">Email</div>
+                    <div class="customer-value">john.smith@abcpharma.com</div>
+                </div>
+                <div class="customer-info">
+                    <div class="customer-label">Phone</div>
+                    <div class="customer-value">+91 98765 43210</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quotation Table -->
+        <div class="quotation-table">
+            <div class="section-title">Quotation Details</div>
+            <div class="table-container">
+                <table>
+                    <thead class="table-header">
+                        <tr>
+                            <th style="width: 5%;">S.No</th>
+                            <th style="width: 35%;">Product Description</th>
+                            <th style="width: 20%;">Guidelines</th>
+                            <th style="width: 8%;">Qty</th>
+                            <th style="width: 12%;">Unit Price</th>
+                            <th style="width: 12%;">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        <tr>
+                            <td class="sno-cell">1</td>
+                            <td class="product-description">
+                                <div class="product-title">Microbiology & Virology Study</div>
+                                <div class="product-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sample Description:</span> Pharmaceutical product testing
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Product Type:</span> Nutraceuticals
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sample Form:</span> Semi-Solid
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Sample Solvent:</span> Alcohol
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Type of Micro-organism:</span> Fungi
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Micro-organism:</span> Candida albicans, Trichyophyton rubrum, Aspergillus brasiliensis
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="guideline-cell">ASTM E2315 Time kill Assay</td>
+                            <td class="quantity-cell">3</td>
+                            <td class="price-cell">₹7,500</td>
+                            <td class="price-cell">₹22,500</td>
+                        </tr>
+                        <tr>
+                            <td class="sno-cell"></td>
+                            <td class="product-description"></td>
+                            <td class="guideline-cell">ASTM E2613</td>
+                            <td class="quantity-cell">3</td>
+                            <td class="price-cell">₹7,500</td>
+                            <td class="price-cell">₹22,500</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" class="total-label">Sub total (excl. Tax):</td>
+                            <td class="total-value">₹45,000</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" class="total-label">GST (18%):</td>
+                            <td class="total-value">₹8,100</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="4" class="total-label">Grand Total:</td>
+                            <td class="total-value">₹53,100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="quotation-footer">
+            <div class="terms-section">
+                <div class="terms-title">Terms & Conditions</div>
+                <ul class="terms-list">
+                    <li>This quotation is valid for 30 days from the date of issue.</li>
+                    <li>Prices are subject to change without prior notice.</li>
+                    <li>Payment terms: 50% advance, 50% on completion.</li>
+                    <li>Delivery time: 15-20 working days from receipt of samples and advance payment.</li>
+                    <li>All testing will be performed as per standard protocols and guidelines.</li>
+                    <li>Sample requirements: Minimum 100g for testing.</li>
+                </ul>
+            </div>
+            
+            <div class="contact-footer">
+                <p>For any questions please contact us at <a href="mailto:info@radiantresearch.in">info@radiantresearch.in</a></p>
+                <p>Thank you for choosing Radiant Research Services!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
